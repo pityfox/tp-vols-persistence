@@ -13,7 +13,7 @@ import javax.persistence.Version;
 @Table (name="Login")
 public class Login {
 
-	private long id;
+	private Long id;
 	private String login;
 	private String motDePasse;
 	private boolean admin;
@@ -24,7 +24,7 @@ public class Login {
 	}
 
 	@Id  @GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -84,10 +84,9 @@ public class Login {
 		int result = 1;
 		result = prime * result + (admin ? 1231 : 1237);
 		result = prime * result + ((client == null) ? 0 : client.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result
-				+ ((motDePasse == null) ? 0 : motDePasse.hashCode());
+		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
 		result = prime * result + version;
 		return result;
 	}
@@ -108,7 +107,10 @@ public class Login {
 				return false;
 		} else if (!client.equals(other.client))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -125,6 +127,7 @@ public class Login {
 		return true;
 	}
 
+	
 	
 	
 }

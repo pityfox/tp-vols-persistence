@@ -33,7 +33,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @DiscriminatorColumn(name= "Client", length=10, discriminatorType = DiscriminatorType.STRING)
 public abstract class Client {
 
-	private long id;
+	private Long id;
 	private String nom;
 	private Integer numeroTel;
 	private Integer numeroFax;
@@ -42,7 +42,7 @@ public abstract class Client {
 	private Adresse adresse;
 	private List<Reservation> reservations;
 	//private Set<Reservation> reservations = new HashSet<Reservation>();
-	private int version;
+	private Integer version;
 	
 
 	public Client() {
@@ -57,11 +57,11 @@ public abstract class Client {
 
 
 	@Id @GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -154,83 +154,15 @@ public abstract class Client {
 
 	@Version
 	@Column(name="Version")
-	public int getVersion() {
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Integer version) {
 		this.version = version;
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((numeroFax == null) ? 0 : numeroFax.hashCode());
-		result = prime * result + ((numeroTel == null) ? 0 : numeroTel.hashCode());
-		result = prime * result + ((reservations == null) ? 0 : reservations.hashCode());
-		result = prime * result + version;
-		return result;
-	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Client other = (Client) obj;
-		if (adresse == null) {
-			if (other.adresse != null)
-				return false;
-		} else if (!adresse.equals(other.adresse))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (numeroFax == null) {
-			if (other.numeroFax != null)
-				return false;
-		} else if (!numeroFax.equals(other.numeroFax))
-			return false;
-		if (numeroTel == null) {
-			if (other.numeroTel != null)
-				return false;
-		} else if (!numeroTel.equals(other.numeroTel))
-			return false;
-		if (reservations == null) {
-			if (other.reservations != null)
-				return false;
-		} else if (!reservations.equals(other.reservations))
-			return false;
-		if (version != other.version)
-			return false;
-		return true;
-	}
 
 
 

@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Entity
 @DiscriminatorValue("Physique")
-@Validated
+//@Validated
 public class ClientPhysique extends Client {
 
 	private TitrePhysique titre;

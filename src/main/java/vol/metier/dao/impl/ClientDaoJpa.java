@@ -58,7 +58,8 @@ public class ClientDaoJpa implements ClientDao {
 		for(Reservation resa : client.getReservations()){
 			reservationDao.delete(resa);
 		}
-		em.remove(client.getLogin());
+		if(client.getLogin() != null)
+			em.remove(client.getLogin());
 		em.remove(client);
 		
 	}
