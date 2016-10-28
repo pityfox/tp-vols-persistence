@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 
@@ -49,7 +50,8 @@ public class Reservation {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Past(message="La date de reservation doit être inférieure à la date du jour")
+	@Past(message="{reservation.date.past}")
+	@NotNull(message="{reservation.date.notNull}")
 	public Date getDate() {
 		return date;
 	}
@@ -59,7 +61,7 @@ public class Reservation {
 	}
 
 	@Column(name="Numero", length = 30)
-	@Min(value=1, message="Le numero doit comporter que des chiffres")
+	@NotNull(message="{reservation.numero.notNull}")
 		public Integer getNumero() {
 		return numero;
 	}
