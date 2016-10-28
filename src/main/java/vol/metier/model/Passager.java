@@ -53,7 +53,7 @@ public class Passager {
 
 	@Column(name = "Prenom", length = 50)
 	@Size(min = 2, message = "{passager.prenom.required}")
-	@Pattern(regexp = "^[A-Z]+.*", message = "{passager.prenom.required}")
+	@Pattern(regexp = "^[A-Z]+.*", message = "{passager.prenom.required2}")
 	public String getPrenom() {
 		return prenom;
 	}

@@ -29,7 +29,7 @@ public class ReservationDaoJpa implements ReservationDao {
 	
 	@Override
 	@Transactional(readOnly=true)
-	public Reservation find(int numero) {
+	public Reservation find(Integer numero) {
 		Query query = em.createQuery("from Reservation r where r.numero = :numero");
 		query.setParameter("numero", numero);
 		List<Reservation> res = query.getResultList();
