@@ -65,8 +65,4 @@ public class CompagnieAerienne {
 		this.version = version;
 	}
 
-	
-	
-	
-
 }
