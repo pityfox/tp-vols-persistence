@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vol.metier.dao.AeroportDao;
 import vol.metier.dao.CompagnieAerienneVolDao;
 import vol.metier.dao.EscaleDao;
 import vol.metier.dao.ReservationDao;
 import vol.metier.dao.VolDao;
+import vol.metier.model.Aeroport;
 import vol.metier.model.CompagnieAerienneVol;
 import vol.metier.model.Escale;
 import vol.metier.model.Reservation;
@@ -33,22 +35,31 @@ public class VolDaoJpa implements VolDao {
 	private CompagnieAerienneVolDao compagnieAerienneVolDao;
 	@Autowired
 	private EscaleDao escaleDao;
+	@Autowired
+	private AeroportDao aeroportDao;
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Vol find(Long id) {
 		return em.find(Vol.class, id);
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Vol> findAll() {
 		Query query = em.createQuery("from Vol v");
 		return query.getResultList();
 	}
 
+	public List<Vol> findAllFetch() {
+		Query query = em.createQuery("select v from Vol v join fetch v.depart d join fetch v.arrivee a");
+		return query.getResultList();
+	}
+
 	@Override
 	public void create(Vol vol) {
+//		vol.setDepart(aeroportDao.update(vol.getDepart()));
+//		vol.setArrivee(aeroportDao.update(vol.getArrivee()));
 		em.persist(vol);
 	}
 

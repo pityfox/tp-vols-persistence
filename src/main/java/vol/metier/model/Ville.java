@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="Villes")
@@ -33,6 +35,8 @@ public class Ville {
 	}
 
 	@Column(name="Nom", length=50)
+	@Size(min = 1, message="{ville.nom.required}") 
+	@Pattern(regexp="^[A-Z]+.*", message="{ville.nom.required2}")
 	public String getNom() {
 		return nom;
 	}

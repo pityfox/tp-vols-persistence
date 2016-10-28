@@ -10,12 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="Aeroports")
 public class Aeroport {
 
-	private long id;
+	private Long id;
 	private String nom;
 	private List<VilleAeroport> villeAeroport;
 	private List<Escale> escales;
@@ -25,15 +27,17 @@ public class Aeroport {
 	}
 
 	@Id @GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@Column(name="Nom",length=50)
+	@Size(min = 1, message="{aeroport.nom.required}") 
+	@Pattern(regexp="^[A-Z]+.*", message="{aeroport.nom.required2}")
 	public String getNom() {
 		return nom;
 	}
@@ -78,11 +82,10 @@ public class Aeroport {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((escales == null) ? 0 : escales.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + version;
-		result = prime * result
-				+ ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
+		result = prime * result + ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
 		return result;
 	}
 
@@ -100,7 +103,10 @@ public class Aeroport {
 				return false;
 		} else if (!escales.equals(other.escales))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nom == null) {
 			if (other.nom != null)
@@ -116,6 +122,8 @@ public class Aeroport {
 			return false;
 		return true;
 	}
+
+	
 
 	
 	

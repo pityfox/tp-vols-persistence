@@ -8,23 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table (name="Login")
 public class Login {
 
-	private Long id;
+	private long id;
 	private String login;
 	private String motDePasse;
 	private boolean admin;
 	private int version;
 	private Client client;
 	
+	
 	public Login() {
 	}
 
 	@Id  @GeneratedValue
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -33,6 +36,8 @@ public class Login {
 	}
 
 	@Column(name="Login", length=50, unique=true)
+	@Size(min = 5, message="{login.login.required}") 
+	
 	public String getLogin() {
 		return login;
 	}
@@ -42,6 +47,8 @@ public class Login {
 	}
 
 	@Column(name="MotDePasse",length=50)
+	@Size(min = 6, message="{login.motDePasse.required}")
+	@Pattern(regexp = ".*[@#$%]", message="{login.motDePasse.required2}")
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -51,6 +58,7 @@ public class Login {
 	}
 
 	@Column(name="Admin")
+	
 	public boolean isAdmin() {
 		return admin;
 	}
@@ -84,9 +92,10 @@ public class Login {
 		int result = 1;
 		result = prime * result + (admin ? 1231 : 1237);
 		result = prime * result + ((client == null) ? 0 : client.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
+		result = prime * result
+				+ ((motDePasse == null) ? 0 : motDePasse.hashCode());
 		result = prime * result + version;
 		return result;
 	}
@@ -107,10 +116,7 @@ public class Login {
 				return false;
 		} else if (!client.equals(other.client))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -127,7 +133,6 @@ public class Login {
 		return true;
 	}
 
-	
 	
 	
 }
