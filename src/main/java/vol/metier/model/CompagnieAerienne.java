@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="CompagnieAerienne")
 public class CompagnieAerienne {
 
-	private long id;
+	private Long id;
 	private String nom;
 	private List<CompagnieAerienneVol> compagniesAerienneVol;
 	private int version;
@@ -27,11 +27,11 @@ public class CompagnieAerienne {
 	}
 
 	@Id @GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -57,52 +57,12 @@ public class CompagnieAerienne {
 
 	@Version
 	@Column(name="Version")
-	public int getVersion() {
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Integer version) {
 		this.version = version;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((compagniesAerienneVol == null) ? 0 : compagniesAerienneVol
-						.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + version;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CompagnieAerienne other = (CompagnieAerienne) obj;
-		if (compagniesAerienneVol == null) {
-			if (other.compagniesAerienneVol != null)
-				return false;
-		} else if (!compagniesAerienneVol.equals(other.compagniesAerienneVol))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (version != other.version)
-			return false;
-		return true;
 	}
 
 	

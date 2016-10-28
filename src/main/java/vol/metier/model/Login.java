@@ -17,7 +17,7 @@ public class Login {
 	private String login;
 	private String motDePasse;
 	private boolean admin;
-	private int version;
+	private Integer version;
 	private Client client;
 	
 	public Login() {
@@ -28,7 +28,7 @@ public class Login {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -70,64 +70,14 @@ public class Login {
 
 	@Version
 	@Column(name="Version")
-	public int getVersion() {
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Integer version) {
 		this.version = version;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (admin ? 1231 : 1237);
-		result = prime * result + ((client == null) ? 0 : client.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
-		result = prime * result + version;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Login other = (Login) obj;
-		if (admin != other.admin)
-			return false;
-		if (client == null) {
-			if (other.client != null)
-				return false;
-		} else if (!client.equals(other.client))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (motDePasse == null) {
-			if (other.motDePasse != null)
-				return false;
-		} else if (!motDePasse.equals(other.motDePasse))
-			return false;
-		if (version != other.version)
-			return false;
-		return true;
-	}
-
-	
 	
 	
 }
