@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="CompagnieAerienne")
 public class CompagnieAerienne {
@@ -34,6 +36,7 @@ public class CompagnieAerienne {
 	}
 
 	@Column(name="Nom", length=50)
+	@NotEmpty(message="{compagnieAeriennes.nom.notNull}")
 	public String getNom() {
 		return nom;
 	}

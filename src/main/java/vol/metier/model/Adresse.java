@@ -1,6 +1,8 @@
 package vol.metier.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Embeddable
 public class Adresse {
@@ -21,6 +23,8 @@ public class Adresse {
 		this.adresse = adresse;
 	}
 
+	
+	@Pattern(regexp="^[0-9]{5}$", message="{adresse.codePostal.pattern}")
 	public String getCodePostal() {
 		return codePostal;
 	}

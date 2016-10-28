@@ -22,6 +22,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -30,8 +35,8 @@ public abstract class Client {
 
 	private long id;
 	private String nom;
-	private int numeroTel;
-	private int numeroFax;
+	private Integer numeroTel;
+	private Integer numeroFax;
 	private String email;
 	private Login login;
 	private Adresse adresse;
@@ -61,6 +66,7 @@ public abstract class Client {
 	}
 
 	@Column(name="Nom",length=50)
+	@NotEmpty(message="{client.nom.notNull}")
 	public String getNom() {
 		return nom;
 	}
@@ -70,24 +76,26 @@ public abstract class Client {
 	}
 
 	@Column(name="NumeroTel")
-	public int getNumeroTel() {
+	public Integer getNumeroTel() {
 		return numeroTel;
 	}
 
-	public void setNumeroTel(int numeroTel) {
+	public void setNumeroTel(Integer numeroTel) {
 		this.numeroTel = numeroTel;
 	}
 
 	@Column(name="NumeroFax")
-	public int getNumeroFax() {
+	public Integer getNumeroFax() {
 		return numeroFax;
 	}
 
-	public void setNumeroFax(int numeroFax) {
+	public void setNumeroFax(Integer numeroFax) {
 		this.numeroFax = numeroFax;
 	}
 
 	@Column(name="Email",length=100)
+	@NotEmpty(message="{client.email.notNull}")
+	@Email(message="{client.email.format}")
 	public String getEmail() {
 		return email;
 	}
@@ -114,6 +122,7 @@ public abstract class Client {
 		@AttributeOverride(name="ville",column=@Column(name="C_VILLE",length=50)),
 		@AttributeOverride(name="pays",column=@Column(name="C_PAYS",length=50))
 		})
+	@Valid
 	public Adresse getAdresse() {
 		return adresse;
 	}
@@ -154,8 +163,6 @@ public abstract class Client {
 	}
 
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -165,10 +172,9 @@ public abstract class Client {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + numeroFax;
-		result = prime * result + numeroTel;
-		result = prime * result
-				+ ((reservations == null) ? 0 : reservations.hashCode());
+		result = prime * result + ((numeroFax == null) ? 0 : numeroFax.hashCode());
+		result = prime * result + ((numeroTel == null) ? 0 : numeroTel.hashCode());
+		result = prime * result + ((reservations == null) ? 0 : reservations.hashCode());
 		result = prime * result + version;
 		return result;
 	}
@@ -206,9 +212,15 @@ public abstract class Client {
 				return false;
 		} else if (!nom.equals(other.nom))
 			return false;
-		if (numeroFax != other.numeroFax)
+		if (numeroFax == null) {
+			if (other.numeroFax != null)
+				return false;
+		} else if (!numeroFax.equals(other.numeroFax))
 			return false;
-		if (numeroTel != other.numeroTel)
+		if (numeroTel == null) {
+			if (other.numeroTel != null)
+				return false;
+		} else if (!numeroTel.equals(other.numeroTel))
 			return false;
 		if (reservations == null) {
 			if (other.reservations != null)
@@ -219,6 +231,8 @@ public abstract class Client {
 			return false;
 		return true;
 	}
+
+
 
 	// Avoir le type de client par la DiscriminatorValue
 	@Transient
