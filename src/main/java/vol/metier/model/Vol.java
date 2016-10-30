@@ -36,7 +36,7 @@ public class Vol {
 	private Aeroport arrivee;
 	private List<CompagnieAerienneVol> compagniesAerienneVol;
 	private int version;
-	
+
 	public Vol() {
 	}
 
@@ -53,6 +53,7 @@ public class Vol {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Future(message="{date.futuresvp}")
+	@NotNull(message="{champsobligatoire}")
 	public Date getDateDepart() {
 		return dateDepart;
 	}
@@ -69,11 +70,11 @@ public class Vol {
 	public Date getDateArrivee() {
 		return dateArrivee;
 	}
-	
-	  @AssertTrue(message="{vol.datearriveeanterieure}")
-	  private boolean arrivalafterdeperture() {
-	    return (dateArrivee.after(dateDepart));
-	  }
+
+	@AssertTrue(message="{vol.datearriveeanterieure}")
+	private boolean arrivalafterdeperture() {
+		return (dateArrivee.after(dateDepart));
+	}
 
 	public void setDateArrivee(Date dateArrivee) {
 		this.dateArrivee = dateArrivee;
@@ -109,7 +110,7 @@ public class Vol {
 	public void setEscales(List<Escale> escales) {
 		this.escales = escales;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AeroportDep_Id")
 	@NotNull(message="{champsobligatoire}")
@@ -117,13 +118,14 @@ public class Vol {
 		return depart;
 	}
 
-	
+
 	public void setDepart(Aeroport depart) {
 		this.depart = depart;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AeroportArr_Id")
+	@NotNull(message="{champsobligatoire}")
 	public Aeroport getArrivee() {
 		return arrivee;
 	}
@@ -150,7 +152,7 @@ public class Vol {
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
-	
+
 	@OneToMany(mappedBy="id.vol",fetch = FetchType.LAZY)
 	public List<CompagnieAerienneVol> getCompagniesAerienneVol() {
 		return compagniesAerienneVol;
@@ -243,8 +245,8 @@ public class Vol {
 		return true;
 	}
 
-	
-	
-	
+
+
+
 
 }

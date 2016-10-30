@@ -37,7 +37,6 @@ public class Login {
 
 	@Column(name="Login", length=50, unique=true)
 	@Size(min = 5, message="{login.login.required}") 
-	
 	public String getLogin() {
 		return login;
 	}

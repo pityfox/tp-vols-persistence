@@ -105,8 +105,9 @@ public abstract class Client {
 	}
 
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="Login_Id")
+	@Valid
 	public Login getLogin() {
 		return login;
 	}

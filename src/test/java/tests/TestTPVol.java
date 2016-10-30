@@ -100,7 +100,7 @@ public class TestTPVol {
 		villeEscale.setNom("Geneve");
 
 		Aeroport aeroportDep = new Aeroport();
-		aeroportDep.setNom("charles de gaulle");
+		aeroportDep.setNom("Charles de gaulle");
 
 		Aeroport aeroportArr = new Aeroport();
 		aeroportArr.setNom("Lima airport");
@@ -120,11 +120,11 @@ public class TestTPVol {
 
 		Vol vol = new Vol();
 		Calendar cal = GregorianCalendar.getInstance();
-		cal.set(2014, Calendar.APRIL, 18, 15, 20, 00);
+		cal.set(2017, Calendar.APRIL, 18, 15, 20, 00);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date dateDepart = cal.getTime();
 		Date heureDepart = cal.getTime();
-		cal.set(2015, Calendar.MAY, 4, 15, 35, 00);
+		cal.set(2018, Calendar.MAY, 4, 15, 35, 00);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date dateArrivee = cal.getTime();
 		Date heureArrivee = cal.getTime();
@@ -138,11 +138,11 @@ public class TestTPVol {
 
 		Vol vol2 = new Vol();
 		Calendar cal2 = GregorianCalendar.getInstance();
-		cal2.set(2014, Calendar.APRIL, 18, 15, 20, 00);
+		cal2.set(2019, Calendar.APRIL, 18, 15, 20, 00);
 		cal2.set(Calendar.MILLISECOND, 0);
 		Date dateDepart2 = cal2.getTime();
 		Date heureDepart2 = cal2.getTime();
-		cal2.set(2015, Calendar.MAY, 4, 15, 35, 00);
+		cal2.set(2020, Calendar.MAY, 4, 15, 35, 00);
 		cal2.set(Calendar.MILLISECOND, 0);
 		Date dateArrivee2 = cal2.getTime();
 		Date heureArrivee2 = cal2.getTime();
@@ -181,8 +181,8 @@ public class TestTPVol {
 
 		Login logClient = new Login();
 		logClient.setAdmin(false);
-		logClient.setLogin("rd");
-		logClient.setMotDePasse("rd");
+		logClient.setLogin("rderge");
+		logClient.setMotDePasse("rdgerhsrt@");
 
 		cp.setNom("DESTREZ");
 		cp.setPrenom("Raphael");
@@ -193,12 +193,20 @@ public class TestTPVol {
 		cp.setLogin(logClient);
 
 		Reservation res = new Reservation();
+		Calendar cal3 = GregorianCalendar.getInstance();
+		cal3.set(2015, Calendar.APRIL, 18, 15, 20, 00);
+		cal3.set(Calendar.MILLISECOND, 0);
+		res.setDate(cal3.getTime());
 		res.setNumero(600);
 		res.setPassager(passager);
 		res.setVol(vol);
 		res.setClient(cp);
 		
 		Reservation res2 = new Reservation();
+		Calendar cal4 = GregorianCalendar.getInstance();
+		cal4.set(2016, Calendar.APRIL, 18, 15, 20, 00);
+		cal4.set(Calendar.MILLISECOND, 0);
+		res2.setDate(cal4.getTime());
 		res2.setNumero(601);
 		res2.setPassager(passager);
 		res2.setVol(vol2);
